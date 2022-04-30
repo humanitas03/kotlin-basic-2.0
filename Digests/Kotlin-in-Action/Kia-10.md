@@ -43,10 +43,33 @@
 * 전역 공통 상수를 표현하기 위해 ```object``` 클래스를 이용함.
   * ```object```는 자바에서 지원하지 않는 코틀린 고유의 키워드
   * 컴파일이 되면 ```static class```의 정적 멤버 변수로 취급이 됨
+    * 코틀린 ```object``` 클래스
+```kotlin
+object MyPocketMonsters {
+    const val PIKACHU = "PIKA_PIKA"
+    const val KKOBUGI = "KKOBUK_KKOBUK"
+    const val PAIRI = "PI_PI"
+}
+```
+    * 자바 코드
 ```java
 public static class MyPocketMonsters {
+    @NonNull
     public static String PIKACHU = "PIKA_PIKA";
+    @NonNull
     public static String KKOBUGI = "KKOBUK_KKOBUK";
+    @NonNull    
     public static String PAIRI = "PI_PI";
 }
+```
+
+* 실행 시점에서 ```object``` 안에 프로퍼티의 값을 읽기 위해서 Kotlin Reflect API 이용(```decraredMemberProperties```)
+  * declaredMemberProperties
+```kotlin
+val <T : Any> KClass<T>.declaredMemberProperties: Collection<KProperty1<T, *>>
+```
+  * 구현
+```kotlin
+fun getAllMyMonstersHowling() : List<String> =
+  MyPocketMonsters::class.decraredMemberProperties.map{it.getter.call().toString}
 ```
