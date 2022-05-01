@@ -134,6 +134,10 @@ public interface Stream {
 }
 ```
 
+* 코틀린의 사용 지점 변성 선언은 자바의 한정 와일드 카드와 같습니다.
+  * 코틀린의 MutableList<out T>는 자바 MutableList<? extends T>와 같고,
+  * 코틀린 MutableList<in T>는 자바 MutableList<? super T>와 같다.
+
 #### 스타 프로젝션 : 타입 인자 대신 * 사용
 * 제너릭 타입 인자 정보가 없음을 표현하기 위해 **스타 프로젝션** 사용
   * 제약 조건 : 제너릭 타입을 알 필요가 없을 때, 값을 만들어 내는 메소드만 호출 가능.
