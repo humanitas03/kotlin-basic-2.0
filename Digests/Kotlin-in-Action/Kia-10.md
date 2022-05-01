@@ -73,3 +73,18 @@ val <T : Any> KClass<T>.declaredMemberProperties: Collection<KProperty1<T, *>>
 fun getAllMyMonstersHowling() : List<String> =
   MyPocketMonsters::class.decraredMemberProperties.map{it.getter.call().toString}
 ```
+
+```kotlin
+fun main() {
+    println("=======with Kotlin reflection api")
+    MyPocketMonsters::class.declaredMemberProperties.forEach {
+        println("내 포켓몬의 울음소리는 ? : ${it.name} : ${it.getter.call()}")
+    }
+
+    println("=======with java reflection api")
+    MyPocketMonsters::class.java.declaredFields.forEach {
+        if(it.type.equals(String::class.java))
+            println("내 포켓몬의 울음소리는 ? : ${it.name} : ${it.get(it.name)}")
+    }
+}
+```
